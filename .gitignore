@@ -73,5 +73,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 
+#--------------------------------------------------------
 # Nuget packages
 /[Aa]ssets/[Pp]ackages/*
+
+# inteliJ option
+.idea/*
+
