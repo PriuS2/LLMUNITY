@@ -12,4 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa24db98e045674e82ae83ac320481b, type: 3}
   m_Name: LlmConfig
   m_EditorClassIdentifier: 
-  SERVER_Ollama: http://localhost:11434/
+  Module: 0
+  BackendType: 0
+  Llama_ggufPath: NONE
+  Llama_modelPath: NONE
+  Ollama_SERVER: http://localhost:11434/
+  modelList:
+  - name: bge-m3:latest
+    size: 1157672605
+    digest: 7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab
+    details:
+      format: gguf
+      family: bert
+      families:
+      - bert
+      parameter_size: 566.70M
+      quantization_level: F16
+  - name: nomic-embed-text:latest
+    size: 274302450
+    digest: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+    details:
+      format: gguf
+      family: nomic-bert
+      families:
+      - nomic-bert
+      parameter_size: 137M
+      quantization_level: F16
+  - name: Korean-Bllossom-8B:latest
+    size: 4920735446
+    digest: d82e2f90fd07a91bfac1f867169fb90ba1e01ae121dedbbeecbda906d1dcfb3e
+    details:
+      format: gguf
+      family: llama
+      families:
+      - llama
+      parameter_size: 8.0B
+      quantization_level: Q4_K_M
+  - name: llama3.1:latest
+    size: 4920753328
+    digest: 46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e
+    details:
+      format: gguf
+      family: llama
+      families:
+      - llama
+      parameter_size: 8.0B
+      quantization_level: Q4_K_M

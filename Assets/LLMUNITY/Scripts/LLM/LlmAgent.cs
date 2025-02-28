@@ -30,7 +30,7 @@ namespace Priu.LlmUnity
 
 
         [Header("-")] 
-        public Module module = Module.Default;
+        public Module module = Module.Ollama;
         public string model = "llama3.1:latest";
         
         // [Header("---")] 

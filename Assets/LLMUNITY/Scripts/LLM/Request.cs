@@ -16,14 +16,14 @@ namespace Priu.LlmUnity
     public static partial class Request
     {
 
-        public static async Task<T> PostRequest<T>(Module module, string payload, string endpoint)
+        public static async Task<T> PostRequest<T>(string payload, string endpoint)
         {
             HttpWebRequest httpWebRequest;
 
             try
             {
                 // string url = $"{SERVER}{endpoint}";
-                string url = $"{LlmConfig.GetServer(module)}{endpoint}";
+                string url = $"{LlmConfig.GetServer()}{endpoint}";
                 httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
@@ -53,13 +53,13 @@ namespace Priu.LlmUnity
         }
         
         
-        public static async Task PostRequestStream<T>(Module module, string payload, string endpoint, Action<T> onChunkReceived) where T : Response.BaseResponse
+        public static async Task PostRequestStream<T>(string payload, string endpoint, Action<T> onChunkReceived) where T : Response.BaseResponse
         {
             HttpWebRequest httpWebRequest;
 
             try
             {
-                string url = $"{LlmConfig.GetServer(module)}{endpoint}";
+                string url = $"{LlmConfig.GetServer()}{endpoint}";
                 httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
@@ -104,7 +104,29 @@ namespace Priu.LlmUnity
             Debug.Log($"[Full Response] {fullResponse}");
         }
         
-        
+        public static async Task<T> GetRequest<T>(string endpoint)
+        {
+            HttpWebRequest httpWebRequest;
+
+            try
+            {
+                string url = $"{LlmConfig.GetServer()}{endpoint}";
+                httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n\t{e.StackTrace}");
+                return default;
+            }
+
+            var httpResponse = await httpWebRequest.GetResponseAsync();
+            using var streamReader = new StreamReader(httpResponse.GetResponseStream());
+
+            string result = await streamReader.ReadToEndAsync();
+            return JsonConvert.DeserializeObject<T>(result);
+        }
         
     }
 }

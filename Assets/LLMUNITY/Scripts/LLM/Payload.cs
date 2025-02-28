@@ -739,6 +739,66 @@ namespace Priu.LlmUnity
             }
         }
 
+        
+        //빈 함수
+        public class DoNottingToolCollection : IExecutableFunction
+        {
+            public Tool[] AllTools
+            {
+                get
+                {
+                    if (_allTools == null)
+                    {
+                        _allTools = new Tool[] { ToolDoNotting };
+                    }
+
+                    return _allTools;
+                }
+            }
+
+            private Tool[] _allTools;
+    
+    
+            private Tool ToolDoNotting
+            {
+                get
+                {
+                    if (_toolDoNotting == null)
+                    {
+                        _toolDoNotting = new Tool()
+                        {
+                            Type = Tool.TypeFromEnum(Tool.TypeEnum.function),
+                            Function = new ToolFunction()
+                            {
+                                Name = nameof(DoNotting),
+                                Description = "If there is no other function to call, call this function",
+                                Parameters = null
+                            }
+                        };
+                    }
+            
+                    return _toolDoNotting;
+                }
+            }
+            private Tool _toolDoNotting;
+            public FunctionReturn DoNotting()
+            {
+        
+                var result = new FunctionReturn()
+                {
+                    Function = ToolDoNotting.Function.Name,
+                    Return = "",
+                    ReturnType = ""
+                };
+        
+                return result;
+            }
+
+        }
+
+        
+        
+        
         #endregion
 
         //<지정된 포맷의 답변을 받음>
@@ -924,7 +984,7 @@ namespace Priu.LlmUnity
 
             public static JObject ToSchema()
             {
-                var schema = PriuSchema.JsonSchemaGenerator.GetJsonSchema<T>();
+                var schema = JsonSchemaGenerator.GetJsonSchema<T>();
                 var setting = new JsonLoadSettings()
                 {
                     CommentHandling = CommentHandling.Ignore,
@@ -981,7 +1041,7 @@ namespace Priu.LlmUnity
             public long eval_duration;
         }
 
-        public class List
+        public class ModelList
         {
             public Model[] models;
         }
@@ -993,7 +1053,8 @@ namespace Priu.LlmUnity
         }
     }
     
-    public class Model
+    [Serializable]
+    public struct Model
     {
         public string name;
         public DateTime modified_at;
@@ -1001,7 +1062,8 @@ namespace Priu.LlmUnity
         public string digest;
         public ModelDetail details;
 
-        public class ModelDetail
+        [Serializable]
+        public struct ModelDetail
         {
             public string format;
             public string family;

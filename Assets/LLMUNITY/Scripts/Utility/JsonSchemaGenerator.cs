@@ -9,7 +9,7 @@ using System.Text.Json.Serialization.Metadata;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
-namespace PriuSchema
+namespace Priu.LlmUnity
 {
     /// <summary>
     /// JsonSchemaGenerator.GetJsonSchema 했을 때 required속성에 파라미터가 추가되도록 하는 Attribute
