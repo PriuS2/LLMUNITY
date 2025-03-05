@@ -1,0 +1,9 @@
+NuGetForUnity (https://github.com/GlitchEnzo/NuGetForUnity)
+System.Text.Json (https://www.nuget.org/packages/System.Text.json) (install from NuGetForUnity)
+
+UniTask (https://github.com/Cysharp/UniTask)
+NaughtyAttributes (https://github.com/dbrizov/NaughtyAttributes.git#upm)
+
+Newtonsoft.Json (https://www.newtonsoft.com/json)
+(PackageManager -> install package by name -> com.unity.nuget.newtonsoft-json) 
+or (NuGetForUnity -> Newtonsoft.Json)
